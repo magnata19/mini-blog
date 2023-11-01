@@ -36,13 +36,13 @@ export const useAuthentication = () => {
       const { user } = await createUserWithEmailAndPassword(
         auth,
         data.email,
-        data.password     
+        data.password
       );
 
       await updateProfile(user, {
         displayName: data.displayName,
       });
-      
+
       setLoading(false);
       return user;
     } catch (error) {
@@ -65,10 +65,32 @@ export const useAuthentication = () => {
 
   //logout - signout
   const logout = () => {
-    checkIfIsCancelled()
+    checkIfIsCancelled();
 
-    signOut(auth)
-  }
+    signOut(auth);
+  };
+
+  //login - sign in
+  const login = async (data) => {
+    checkIfIsCancelled();
+
+    setLoading(true);
+    setError(false);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false)
+    } catch (error) {
+      let systemErrorMessage;
+
+      if (error.message.includes('invalid-login-credentials')){
+        systemErrorMessage = "Email ou senha incorretos."
+      } 
+      setError(systemErrorMessage)
+      setLoading(false)
+      console.log(error.message)
+    }
+  };
 
   useEffect(() => {
     return () => setCancelled(true);
@@ -79,6 +101,7 @@ export const useAuthentication = () => {
     createUser,
     error,
     loading,
-    logout
+    logout,
+    login,
   };
 };
