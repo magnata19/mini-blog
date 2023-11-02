@@ -20,11 +20,12 @@ const insertReducer = (state, action) => {
   }
 };
 
+// deal with memory leak
+const [cancelled, setCancelled] = useState(false);
+
 export const useInsertDocument = (docCollection) => {
   const [response, dispatch] = useReducer(insertReducer, initialState);
 
-  // deal with memory leak
-  const [cancelled, setCancelled] = useState(false);
 
   const checkCancelBeforeDispatch = (action) => {
     if (!cancelled) {
@@ -52,10 +53,9 @@ export const useInsertDocument = (docCollection) => {
     }
   };
 
-  //esse useEffect impede que o botao de loading apareça quando cadastramos um post
-  // useEffect(() => {
-  //   return () => setCancelled(true);
-  // }, []);
+  useEffect(() => {
+    return () => setCancelled(true);
+  }, []);
 
   return { insertDocument, response };
 };
