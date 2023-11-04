@@ -23,6 +23,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import Search from "./pages/Search/Search";
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/search" element={<Search />} />
               {/* autenticando rotas de páginas baseado no usuario estar ou nao logado */}
               <Route path="/login" element={!user ? <Login /> : <Navigate to='/'/>} />
               <Route path="/register" element={!user ? <Register /> : <Navigate to='/'/>} />
