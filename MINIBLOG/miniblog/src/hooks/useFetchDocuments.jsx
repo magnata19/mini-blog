@@ -26,15 +26,19 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
     async function loadData() {
       if (cancelled) return;
 
-      setLoading(true);
-
       const collectionRef = await collection(db, docCollection);
 
       try {
+        setLoading(true);
+
         let q;
 
-        if(search) {
-          q = await query(collectionRef, where('tagsArray', 'array-contains', search), orderBy('createdAt','desc'))
+        if (search) {
+          q = await query(
+            collectionRef,
+            where("tagsArray", "array-contains", search),
+            orderBy("createdAt", "desc")
+          );
         } else {
           q = await query(collectionRef, orderBy("createdAt", "desc"));
         }
@@ -62,5 +66,5 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
     cancelled = true;
   }, []);
 
-  return {documents, loading, error};
+  return { documents, loading, error };
 };
