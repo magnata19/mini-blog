@@ -2,7 +2,7 @@
 import styles from "./Post.module.css";
 
 //router
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 //hooks
 import { useFetchDocument } from "../../hooks/useFetchDoment";
@@ -30,6 +30,9 @@ const Post = () => {
           </div>
         </>
       )}
+      <Link to="/" className="btn btn-dark">
+        Voltar
+      </Link>
     </div>
   );
 };
