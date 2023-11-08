@@ -32,3 +32,9 @@
     background-color: #000;
     color: #fff;
 }
+
+@media (width < 700px) {
+    .navbar{
+        display: none;
+    }
+}

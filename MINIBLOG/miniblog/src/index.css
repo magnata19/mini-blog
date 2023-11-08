@@ -112,3 +112,9 @@ button[disabled] {
     padding: 5px;
     border-radius: 5px;
 }
+
+@media (width < 700px) {
+    body {
+        padding: 15px;
+    }
+}
